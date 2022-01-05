@@ -9,26 +9,16 @@ public class Testic : MonoBehaviour
     public Text showText;
     public string hello;
     public InputField nameInput;
-    
+
+    [DllImport("__Internal")]
+    private static extern bool IsMobile();
+
     public bool isMobile()
     {
-        #if !UNITY_EDITOR && UNITY_WEBGL
-            return IsMobile();
-        #endif
-
+#if !UNITY_EDITOR && UNITY_WEBGL
+             return IsMobile();
+#endif
         return false;
-    }
-
-    private void Start()
-    {
-        if(isMobile() == true)
-        {
-            //na mobitelu
-        }
-        else
-        {
-            //na PC-u
-        }
     }
 
 
@@ -41,7 +31,7 @@ public class Testic : MonoBehaviour
     {
         if(isMobile() == true)
         {
-            //canvas sa tipkama postane aktivan
+            showText.text = "Mobitel";
         }
 
         if(Input.GetKeyDown(KeyCode.LeftArrow))
